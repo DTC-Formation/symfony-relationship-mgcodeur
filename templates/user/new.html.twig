@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Ajout utilisateur
+{% endblock %}
+
+{% block body %}
+    <div class="card text-left">
+        <div class="card-body">
+            <div class="d-flex justify-content-between flex-wrap align-items-center mb-3">
+                <h4 class="card-title mb-0">Ajouter un utilisateur</h4>
+
+                <a href="{{ path('user.index') }}" class="text-success">
+                    <i class="tabler-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-narrow-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M5 12l14 0"></path>
+                            <path d="M5 12l4 4"></path>
+                            <path d="M5 12l4 -4"></path>
+                        </svg>
+                    </i>
+                    Retour à la liste
+                </a>
+            </div>
+
+            {{ include('user/form/_form.html.twig') }}
+        </div>
+    </div>
+{% endblock %}
