@@ -39,7 +39,7 @@
         </small>
     </div>
 
-    <h4 class="card-title mt-5 mb-3">Adresse {% if user.firstName is not null %}de {{ user.firstName }} {{user.lastName}} {% endif %}</h4>
+    <h4 class="card-title mt-5 mb-3">Adresse</h4>
     
     <div class="form-group">
         {{ form_label(form.address.batch, 'Votre lot') }}
@@ -74,6 +74,47 @@
         <small class="text-danger">
             <ul class="list-unstyled">
                 {% for error in form.address.postalCode.vars.errors %}
+                    <li>{{ error.message }}</li>
+                {% endfor %}
+            </ul>
+        </small>
+    </div>
+
+    <h4 class="card-title mt-5 mb-3">Contactes</h4>
+    
+    <div class="form-group">
+        {{ form_label(form.contact.phone, 'Téléphone') }}
+        {{ form_widget(form.contact.phone) }}
+
+        <small class="text-danger">
+            <ul class="list-unstyled">
+                {% for error in form.contact.phone.vars.errors %}
+                    <li>{{ error.message }}</li>
+                {% endfor %}
+            </ul>
+        </small>
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.contact.email, 'Ville') }}
+        {{ form_widget(form.contact.email) }}
+
+        <small class="text-danger">
+            <ul class="list-unstyled">
+                {% for error in form.contact.email.vars.errors %}
+                    <li>{{ error.message }}</li>
+                {% endfor %}
+            </ul>
+        </small>
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.contact.linkedin, 'Code postal') }}
+        {{ form_widget(form.contact.linkedin) }}
+
+        <small class="text-danger">
+            <ul class="list-unstyled">
+                {% for error in form.contact.linkedin.vars.errors %}
                     <li>{{ error.message }}</li>
                 {% endfor %}
             </ul>

@@ -42,6 +42,9 @@ class User
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?Address $address = null;
 
+    #[ORM\OneToOne(inversedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?Contact $contact = null;
+
     public function __construct()
     {
         $this->id = Uuid::v4();
@@ -96,6 +99,18 @@ class User
     public function setAddress(?Address $address): static
     {
         $this->address = $address;
+
+        return $this;
+    }
+
+    public function getContact(): ?Contact
+    {
+        return $this->contact;
+    }
+
+    public function setContact(?Contact $contact): static
+    {
+        $this->contact = $contact;
 
         return $this;
     }

@@ -75,6 +75,13 @@ class UserType extends AbstractType
                     new Valid(),
                 ],
             ])
+            ->add('contact', ContactType::class, [
+                'label' => false,
+                'required' => false,
+                'constraints' => [
+                    new Valid(),
+                ],
+            ])
         ;
     }
 
