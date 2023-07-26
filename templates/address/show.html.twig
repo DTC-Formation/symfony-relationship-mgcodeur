@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Address{% endblock %}
+
+{% block body %}
+    {# <h1>Address</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ address.id }}</td>
+            </tr>
+            <tr>
+                <th>Batch</th>
+                <td>{{ address.batch }}</td>
+            </tr>
+            <tr>
+                <th>City</th>
+                <td>{{ address.city }}</td>
+            </tr>
+            <tr>
+                <th>PostalCode</th>
+                <td>{{ address.postalCode }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('address.index') }}">back to list</a>
+
+    <a href="{{ path('address.edit', {'id': address.id}) }}">edit</a>
+
+    {{ include('address/_delete_form.html.twig') }} #}
+
+<div class="card text-left">
+    <div class="card-body">
+        <div class="d-flex justify-content-between flex-wrap align-items-center mb-3">
+            <h4 class="card-title mb-0">Détails de l'adresse</h4>
+            <div class="d-flex justify-content-end w-100 px-4">
+                <a href="{{ path('address.index') }}" class="mr-3 text-info">Retour à la liste</a>
+                |
+                <a href="{{ path('address.edit', {'id': address.id}) }}" class="mx-3 text-success">Modifier l'utilisateur</a>
+                |
+                <div class="ml-3">
+                    {{ include('address/_delete_form.html.twig') }}
+                </div>
+            </div>
+        </div>
+        <table class="table table-borderless">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ address.id }}</td>
+                </tr>
+                <tr>
+                    <th>Batch</th>
+                    <td>{{ address.batch }}</td>
+                </tr>
+                <tr>
+                    <th>City</th>
+                    <td>{{ address.city }}</td>
+                </tr>
+                <tr>
+                    <th>PostalCode</th>
+                    <td>{{ address.postalCode }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

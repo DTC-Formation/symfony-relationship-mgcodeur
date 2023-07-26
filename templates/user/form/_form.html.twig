@@ -1,6 +1,5 @@
 {{ form_start(form) }}
-
-    {# {{ form_widget(form) }} #}
+    {{ form_row(form._token) }}
     <div class="form-group">
         {{ form_row(form.firstName) }}
     </div>
@@ -13,8 +12,22 @@
         {{ form_row(form.age) }}
     </div>
 
+    <h4 class="card-title mt-5 mb-3">Adresse {% if user.firstName is not null %}de {{ user.firstName }} {{user.lastName}} {% endif %}</h4>
+    
+    <div class="form-group">
+        {{ form_row(form.address.batch) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_row(form.address.city) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_row(form.address.postalCode) }}
+    </div>
+
     <div class="d-flex justify-content-end mt-4">
         {{ form_row(form.reset) }}
         {{ form_row(form.submit) }}
     </div>
-{{ form_end(form) }}
+{{ form_end(form, {'render_rest': false}) }}

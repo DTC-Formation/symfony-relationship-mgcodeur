@@ -5,10 +5,18 @@
         data-suppress-scroll-x="true"
     >
         <ul class="navigation-left">
-            <li class="nav-item">
+            <li class="nav-item {{ (app.request.attributes.get('_route') == 'user.index') ? 'active' : '' }}">
                 <a class="nav-item-hold" href="{{ path('user.index') }}">
                     <i class="nav-icon i-Add-User"></i>
                     <span class="nav-text">Utilisateurs</span>
+                </a>
+                <div class="triangle"></div>
+            </li>
+
+            <li class="nav-item {{ (app.request.attributes.get('_route') == 'address.index') ? 'active' : '' }}">
+                <a class="nav-item-hold" href="{{ path('address.index') }}">
+                    <i class="nav-icon i-Book"></i>
+                    <span class="nav-text">Adresses</span>
                 </a>
                 <div class="triangle"></div>
             </li>
