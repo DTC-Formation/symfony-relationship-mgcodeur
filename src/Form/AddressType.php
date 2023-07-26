@@ -4,11 +4,15 @@ namespace App\Form;
 
 use App\Entity\Address;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ResetType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ResetType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\FormView;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Validator\Constraints\Length;
 
 class AddressType extends AbstractType
 {
@@ -16,25 +20,30 @@ class AddressType extends AbstractType
     {
         $builder
             ->add('batch', TextType::class, [
-                'label' => 'Lot',
+                'label' => 'Lot',                
                 'attr' => [
                     'placeholder' => 'Veuillez Entrer le lot de votre batiment',
                     'class' => 'form-control',
                 ],
+                'required' => false
             ])
             ->add('city', TextType::class, [
                 'label' => 'Ville',
+                
                 'attr' => [
                     'placeholder' => 'Veuillez Entrer votre ville',
                     'class' => 'form-control',
                 ],
+                'required' => false
             ])
             ->add('postalCode', TextType::class, [
                 'label' => 'Code Postal',
+                
                 'attr' => [
                     'placeholder' => 'Veuillez Entrer votre code postal',
                     'class' => 'form-control',
                 ],
+                'required' => false
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Valider',
