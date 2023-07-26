@@ -5,6 +5,8 @@ namespace App\Entity;
 use Symfony\Component\Uid\Uuid;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User
@@ -14,16 +16,34 @@ class User
     private ?Uuid $id = null;
 
     #[ORM\Column(length: 255)]
+    #[NotBlank(message: 'Veuillez entrer votre nom')]
+    #[Length(
+        min: 2, 
+        minMessage: 'Votre nom doit contenir au moins {{ limit }} caractères', 
+        max: 255, 
+        maxMessage: 'Votre nom ne peut contenir plus de {{ limit }} caractères'
+    )]
     private ?string $firstName = null;
 
     #[ORM\Column(length: 255)]
+    #[NotBlank(message: 'Veuillez entrer votre prénom')]
+    #[Length(
+        min: 2, 
+        minMessage: 'Votre prénom doit contenir au moins {{ limit }} caractères', 
+        max: 255, 
+        maxMessage: 'Votre prénom ne peut contenir plus de {{ limit }} caractères'
+    )]
     private ?string $lastName = null;
 
     #[ORM\Column]
+    #[NotBlank(message: 'Veuillez entrer votre âge')]
     private ?int $age = null;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?Address $address = null;
+
+    #[ORM\OneToOne(inversedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?Contact $contact = null;
 
     public function __construct()
     {
@@ -79,6 +99,18 @@ class User
     public function setAddress(?Address $address): static
     {
         $this->address = $address;
+
+        return $this;
+    }
+
+    public function getContact(): ?Contact
+    {
+        return $this->contact;
+    }
+
+    public function setContact(?Contact $contact): static
+    {
+        $this->contact = $contact;
 
         return $this;
     }

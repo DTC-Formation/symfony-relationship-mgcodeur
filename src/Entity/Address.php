@@ -2,9 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\AddressRepository;
-use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Uid\Uuid;
+use Doctrine\ORM\Mapping as ORM;
+use App\Repository\AddressRepository;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 #[ORM\Entity(repositoryClass: AddressRepository::class)]
 class Address
@@ -14,12 +16,33 @@ class Address
     private ?Uuid $id = null;
 
     #[ORM\Column(length: 255)]
+    #[NotBlank(message: 'Veuillez entrer le lot de votre batiment')]
+    #[Length(
+        min: 2, 
+        minMessage: 'Le lot de votre batiment doit contenir au moins {{ limit }} caractères', 
+        max: 255, 
+        maxMessage: 'Le lot de votre batiment doit contenir au plus {{ limit }} caractères'
+    )]
     private ?string $batch = null;
 
     #[ORM\Column(length: 255)]
+    #[NotBlank(message: 'Veuillez entrer votre ville')]
+    #[Length(
+        min: 2, 
+        minMessage: 'Votre ville doit contenir au moins {{ limit }} caractères', 
+        max: 255,
+        maxMessage: 'Votre ville doit contenir au plus {{ limit }} caractères'
+    )]
     private ?string $city = null;
 
     #[ORM\Column(length: 255)]
+    #[NotBlank(message: 'Veuillez entrer votre code postal')]
+    #[Length(
+        min: 2, 
+        minMessage: 'Votre code postal doit contenir au moins {{ limit }} caractères', 
+        max: 255, 
+        maxMessage: 'Votre code postal doit contenir au plus {{ limit }} caractères'
+    )]
     private ?string $postalCode = null;
 
     #[ORM\OneToOne(mappedBy: 'address', targetEntity: User::class)]

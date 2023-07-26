@@ -1,29 +1,124 @@
 {{ form_start(form) }}
     {{ form_row(form._token) }}
     <div class="form-group">
-        {{ form_row(form.firstName) }}
+        {{ form_label(form.firstName, 'Nom: ') }}
+        {{ form_widget(form.firstName) }}
+
+        <small class="text-danger">
+            <ul class="list-unstyled">
+                {% for error in form.firstName.vars.errors %}
+                    <li>{{ error.message }}</li>
+                {% endfor %}
+            </ul>
+        </small>
     </div>
 
     <div class="form-group">
-        {{ form_row(form.lastName) }}
+        {{ form_label(form.lastName, 'Prenom: ') }}
+        {{ form_widget(form.lastName) }}
+
+        <small class="text-danger">
+            <ul class="list-unstyled">
+                {% for error in form.lastName.vars.errors %}
+                    <li>{{ error.message }}</li>
+                {% endfor %}
+            </ul>
+        </small>
     </div>
 
     <div class="form-group">
-        {{ form_row(form.age) }}
+        {{ form_label(form.age, 'Votre age: ') }}
+        {{ form_widget(form.age) }}
+
+        <small class="text-danger">
+            <ul class="list-unstyled">
+                {% for error in form.age.vars.errors %}
+                    <li>{{ error.message }}</li>
+                {% endfor %}
+            </ul>
+        </small>
     </div>
 
-    <h4 class="card-title mt-5 mb-3">Adresse {% if user.firstName is not null %}de {{ user.firstName }} {{user.lastName}} {% endif %}</h4>
+    <h4 class="card-title mt-5 mb-3">Adresse</h4>
     
     <div class="form-group">
-        {{ form_row(form.address.batch) }}
+        {{ form_label(form.address.batch, 'Votre lot') }}
+        {{ form_widget(form.address.batch) }}
+
+        <small class="text-danger">
+            <ul class="list-unstyled">
+                {% for error in form.address.batch.vars.errors %}
+                    <li>{{ error.message }}</li>
+                {% endfor %}
+            </ul>
+        </small>
     </div>
 
     <div class="form-group">
-        {{ form_row(form.address.city) }}
+        {{ form_label(form.address.city, 'Ville') }}
+        {{ form_widget(form.address.city) }}
+
+        <small class="text-danger">
+            <ul class="list-unstyled">
+                {% for error in form.address.city.vars.errors %}
+                    <li>{{ error.message }}</li>
+                {% endfor %}
+            </ul>
+        </small>
     </div>
 
     <div class="form-group">
-        {{ form_row(form.address.postalCode) }}
+        {{ form_label(form.address.postalCode, 'Code postal') }}
+        {{ form_widget(form.address.postalCode) }}
+
+        <small class="text-danger">
+            <ul class="list-unstyled">
+                {% for error in form.address.postalCode.vars.errors %}
+                    <li>{{ error.message }}</li>
+                {% endfor %}
+            </ul>
+        </small>
+    </div>
+
+    <h4 class="card-title mt-5 mb-3">Contactes</h4>
+    
+    <div class="form-group">
+        {{ form_label(form.contact.phone, 'Téléphone') }}
+        {{ form_widget(form.contact.phone) }}
+
+        <small class="text-danger">
+            <ul class="list-unstyled">
+                {% for error in form.contact.phone.vars.errors %}
+                    <li>{{ error.message }}</li>
+                {% endfor %}
+            </ul>
+        </small>
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.contact.email, 'Ville') }}
+        {{ form_widget(form.contact.email) }}
+
+        <small class="text-danger">
+            <ul class="list-unstyled">
+                {% for error in form.contact.email.vars.errors %}
+                    <li>{{ error.message }}</li>
+                {% endfor %}
+            </ul>
+        </small>
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.contact.linkedin, 'Code postal') }}
+        {{ form_widget(form.contact.linkedin) }}
+
+        <small class="text-danger">
+            <ul class="list-unstyled">
+                {% for error in form.contact.linkedin.vars.errors %}
+                    <li>{{ error.message }}</li>
+                {% endfor %}
+            </ul>
+        </small>
     </div>
 
     <div class="d-flex justify-content-end mt-4">

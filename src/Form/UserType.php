@@ -5,10 +5,11 @@ namespace App\Form;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\Valid;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\ResetType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class UserType extends AbstractType
@@ -22,6 +23,10 @@ class UserType extends AbstractType
                     'placeholder' => 'Veuillez Entrez votre nom',
                     'class' => 'form-control',
                 ],
+                'constraints' => [
+                    new Valid(),
+                ],
+                'required' => false,
             ])
             ->add('lastName', TextType::class, [
                 'label' => 'Prénom',
@@ -29,6 +34,10 @@ class UserType extends AbstractType
                     'placeholder' => 'Veuillez Entrez votre prénom',
                     'class' => 'form-control',
                 ],
+                'constraints' => [
+                    new Valid(),
+                ],
+                'required' => false,
             ])
             ->add('age', NumberType::class, [
                 'label' => 'Age',
@@ -41,7 +50,11 @@ class UserType extends AbstractType
                     'value' => '1',
                     'pattern' => '[0-9]+'
                 ],
+                'constraints' => [
+                    new Valid(),
+                ],
                 'html5' => true,
+                'required' => false,
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Enregistrer',
@@ -57,6 +70,17 @@ class UserType extends AbstractType
             ])
             ->add('address', AddressType::class, [
                 'label' => false,
+                'required' => false,
+                'constraints' => [
+                    new Valid(),
+                ],
+            ])
+            ->add('contact', ContactType::class, [
+                'label' => false,
+                'required' => false,
+                'constraints' => [
+                    new Valid(),
+                ],
             ])
         ;
     }
