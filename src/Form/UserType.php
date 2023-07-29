@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Valid;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -80,6 +81,20 @@ class UserType extends AbstractType
                 'required' => false,
                 'constraints' => [
                     new Valid(),
+                ],
+            ])
+            ->add('experience', CollectionType::class, [
+                'label' => false,
+                'entry_type' => ExperienceType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'entry_options' => [
+                    'label' => false,
+                ],
+                'required' => false,
+                'attr' => [
+                    'class' => 'experience-collection mb-3',
                 ],
             ])
         ;

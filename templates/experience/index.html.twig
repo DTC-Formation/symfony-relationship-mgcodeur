@@ -1,48 +1,49 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    Liste des contactes
+    Liste de tous les experiences
 {% endblock %}
 
 {% block body %}
+
 <div class="card text-left">
     <div class="card-body">
         <div class="d-flex justify-content-between flex-wrap align-items-center mb-3">
-            <h4 class="card-title mb-0">Liste des contactes</h4>
+            <h4 class="card-title mb-0">Liste de tous les experiences</h4>
         </div>
         
         <div class="table-responsive">
             <table class="table text-center">
                 <thead>
                     <tr>
-                        <th>Téléphone</th>
-                        <th>Email</th>
-                        <th>Linkedin</th>
+                        <th>Experience</th>
+                        <th>Date de début</th>
+                        <th>Date de fin</th>
                         <th>actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for contact in contacts %}
+                    {% for experience in experiences %}
                         <tr>
-                            <td>{{ contact.phone }}</td>
-                            <td>{{ contact.email }}</td>
-                            <td>{{ contact.linkedin }}</td>
+                            <td>{{ experience.name }}</td>
+                            <td>{{ experience.startDate | date }}</td>
+                            <td>{{ experience.endDate | date }}</td>
                             <td>
-                                <a class="text-primary mr-2" href="{{ path('contact.show', {'id': contact.id}) }}">
+                                <a class="text-primary mr-2" href="{{ path('experience.show', {'id': experience.id}) }}">
                                     <i class="nav-icon i-Eye font-weight-bold"></i>
                                 </a>
-                                <a class="text-success mr-2" href="{{ path('contact.edit', {'id': contact.id}) }}">
+                                <a class="text-success mr-2" href="{{ path('experience.edit', {'id': experience.id}) }}">
                                     <i class="nav-icon i-Pen-2 font-weight-bold"></i>
                                 </a>
                                 <form
                                     method="post"
-                                    action="{{ path('contact.delete', {'id': contact.id}) }}"
+                                    action="{{ path('experience.delete', {'id': experience.id}) }}"
                                     class="d-inline-flex"
                                 >
-                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ contact.id) }}">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ experience.id) }}">
                                     <a
                                         class="text-danger"
-                                        onclick="if(confirm('Voulez-vous vraiment supprimer cet adresse ?')) { this.closest('form').submit(); }; return false;"
+                                        onclick="if(confirm('Voulez-vous vraiment supprimer cet experience ?')) { this.closest('form').submit(); }; return false;"
                                         href="#"
                                     >
                                         <i class="nav-icon i-Close-Window font-weight-bold"></i>
@@ -62,4 +63,5 @@
         </div>
     </div>
 </div>
+
 {% endblock %}
