@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Uid\Uuid;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
@@ -45,9 +47,17 @@ class User
     #[ORM\OneToOne(inversedBy: 'user', cascade: ['persist', 'remove'])]
     private ?Contact $contact = null;
 
+    #[ORM\OneToMany(
+        mappedBy: 'user', 
+        targetEntity: Experience::class, 
+        cascade: ['persist', 'remove']
+    )]
+    private Collection $experience;
+
     public function __construct()
     {
         $this->id = Uuid::v4();
+        $this->experience = new ArrayCollection();
     }
 
     public function getId(): ?Uuid
@@ -113,5 +123,39 @@ class User
         $this->contact = $contact;
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, Experience>
+     */
+    public function getExperience(): Collection
+    {
+        return $this->experience;
+    }
+
+    public function addExperience(Experience $experience): static
+    {
+        if (!$this->experience->contains($experience)) {
+            $this->experience->add($experience);
+            $experience->setUser($this);
+        }
+        
+        return $this;
+    }
+
+    public function removeExperience(Experience $experience): static
+    {
+        if ($this->experience->removeElement($experience)) {
+            if ($experience->getUser() === $this) {
+                $experience->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->firstName . ' ' . $this->lastName;
     }
 }

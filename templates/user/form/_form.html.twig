@@ -109,7 +109,7 @@
     </div>
 
     <div class="form-group">
-        {{ form_label(form.contact.linkedin, 'Code postal') }}
+        {{ form_label(form.contact.linkedin, 'Linkedin') }}
         {{ form_widget(form.contact.linkedin) }}
 
         <small class="text-danger">
@@ -121,8 +121,61 @@
         </small>
     </div>
 
+    {# dynamic form: one to many #}
+    <h4 class="card-title mt-5 mb-3">Expériences</h4>
+
+    {# dynamic form experience #}
+    <div 
+        id="experience"  
+        data-prototype="{{ form_widget(form.experience.vars.prototype)|e('html_attr') }}"
+        data-index="{{ form.experience|length > 0 ? form.experience|last.vars.name + 1 : 0 }}"
+        class="mb-3"
+    >
+
+    </div>
+
+    <button type="button" class="add_experience_btn btn btn-info" data-collection-holder-class="experience">
+        <i class="tabler-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M12 5l0 14"></path>
+                <path d="M5 12l14 0"></path>
+            </svg>
+        </i>
+        Ajouter une experience
+    </button>
+
+
     <div class="d-flex justify-content-end mt-4">
         {{ form_row(form.reset) }}
         {{ form_row(form.submit) }}
     </div>
 {{ form_end(form, {'render_rest': false}) }}
+
+<script type="module">
+    class FormBuilder {
+        constructor(buttonClass) {
+            this.init = this.init.bind(this);
+            
+            this.buttonClass = buttonClass;
+            this.button = document.querySelector(`.${this.buttonClass}`);
+            this.collectionHolder = document.querySelector(`#${this.button.dataset.collectionHolderClass}`);
+            this.index = this.collectionHolder.dataset.index;
+            this.prototype = this.collectionHolder.dataset.prototype;
+            this.init();
+        }
+
+        init() {
+            this.button.addEventListener("click", this.addFormToCollection.bind(this));
+        }
+
+        addFormToCollection() {
+            const item = document.createElement('div');
+            item.innerHTML = this.prototype.replace(/__name__/g, this.index);
+            this.collectionHolder.appendChild(item);
+            this.collectionHolder.dataset.index++;
+        }
+    }
+
+    new FormBuilder('add_experience_btn');
+</script>
